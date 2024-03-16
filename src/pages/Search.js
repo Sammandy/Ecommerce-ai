@@ -4,42 +4,42 @@ import Product from '../components/Product'
 
 const Search = () => {
 
-    const [prompt, setPrompt] = useState("");
-    const [products, setProducts] = useState([]);
+  const [prompt, setPrompt] = useState("");
+  const [products, setProducts] = useState([]);
 
-    const handleClick = async(e) => {
-        e.preventDefault();
-        console.log('You clicked me hehe', prompt);
-        await getProducts();
-        console.log(products);
-        console.log("Done searching products")
-    }
+  const handleClick = async (e) => {
+    e.preventDefault();
+    console.log('You clicked me hehe', prompt);
+    await getProducts();
+    console.log(products);
+    console.log("Done searching products")
+  }
 
-    const getProducts = async () => {
-        try {
-            const url = `https://ai-ecommerce-server.onrender.com/api/ai`;
-            console.log("Processing prompt: ", prompt);
-            const response = await axios.post(url, {"prompt": prompt});
-            console.log(response);
-            const product_array = response.data["products"];
-            setProducts(product_array.map((product) => {
-                return {
-                    id: product.id,
-                    title: product.title,
-                    category: product.category,
-                    price: product.price,
-                    image: product.images[0]
-                }
-            }));
-        } catch (error) {
-            console.error(error);
+  const getProducts = async () => {
+    try {
+      const url = `https://ai-ecommerce-server.onrender.com/api/ai`;
+      console.log("Processing prompt: ", prompt);
+      const response = await axios.post(url, { "prompt": prompt });
+      console.log(response);
+      const product_array = response.data["products"];
+      setProducts(product_array.map((product) => {
+        return {
+          id: product.id,
+          title: product.title,
+          category: product.category,
+          price: product.price,
+          image: product.images[0]
         }
+      }));
+    } catch (error) {
+      console.error(error);
     }
+  }
 
 
   return (
     <div>
-      <form class="max-w-md mx-auto">
+      <form class="max-w-md py-20 mx-auto">
         <label
           for="default-search"
           class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -74,7 +74,7 @@ const Search = () => {
           />
           <button
             type="submit"
-            class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleClick} 
+            class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleClick}
           >
             Search
           </button>
