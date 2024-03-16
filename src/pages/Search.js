@@ -9,7 +9,7 @@ const Search = () => {
 
     const handleClick = async(e) => {
         e.preventDefault();
-        console.log('You clicked me', prompt);
+        console.log('You clicked me hehe', prompt);
         await getProducts();
         console.log(products);
         console.log("Done searching products")
